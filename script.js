@@ -11,11 +11,8 @@ function multiply (a, b) {
 }
 
 function divide (a, b) {
-    return Number(a) / Number(b);
-}
-
-function root (a){
-
+    if (b == 0){return 'ERROR'}
+    else{return Number(a) / Number(b);}
 }
 
 function operate (operator, a, b){
@@ -47,16 +44,12 @@ var currentValue = null;
 var operation = null;
 var dec = null;
 
-function displayAccumulator (accumulator){
-    accumulator = accumulator.toString();
-    if (accumulator.length > 8){
-         accumulator = accumulator.slice(0,7);
+function display (number){
+    number = number.toString();
+    if (number.length > 8){
+         number = number.slice(0,7);
         }
-    document.getElementById('screen').innerHTML = `${accumulator}`
-}
-
-function displayCurrentValue (currentValue){
-    document.getElementById('screen').innerHTML = `${currentValue}`
+    document.getElementById('screen').innerHTML = `${number}`
 }
 
 //CLEAR
@@ -65,7 +58,7 @@ document.getElementById("clear").addEventListener("click", function(){
     accumulator = 0;
     currentValue = null;
     operation = null;
-    displayAccumulator(accumulator)
+    display(accumulator)
 });
 
 
@@ -79,27 +72,29 @@ buttons.forEach((button) => {button.addEventListener('click', (e) => {
     else {
         currentValue = button.id;
     }
-    displayCurrentValue(currentValue);
+    display(currentValue);
   });
 });
 
 //OPERATORS (2 variables)
 const ops = document.querySelectorAll('.op');
 ops.forEach((button) => {button.addEventListener('click', (e) => {
-    accumulator = currentValue;
-    currentValue = null;
-    document.getElementById('screen').innerHTML = `${accumulator}`
-    operation = button.id;
-    document.getElementById(operation).style.backgroundColor = 'maroon';
+    if (currentValue){
+        accumulator = currentValue;
+        currentValue = null;
+        document.getElementById('screen').innerHTML = `${accumulator}`
+        operation = button.id;
+        document.getElementById(operation).style.backgroundColor = 'maroon';
+    }
 });
 })
 
 //OPERATORS (1 variable)
 const ops1 = document.querySelectorAll('.op1');
 ops1.forEach((button) => {button.addEventListener('click', (e) => {
-    console.log(button.id)
+    if (currentValue == null){currentValue = accumulator}
     currentValue = operate1(button.id, currentValue);
-    displayCurrentValue(currentValue);
+    display(currentValue);
 });
 })
 
@@ -109,7 +104,7 @@ document.getElementById("decimal").addEventListener("click", function(){
     if (dec == null) {
         document.getElementById('decimal').style.backgroundColor = 'gray';
         currentValue = currentValue + '.'
-        displayCurrentValue(currentValue);
+        display(currentValue);
     }
 });
 
@@ -117,6 +112,6 @@ document.getElementById("decimal").addEventListener("click", function(){
 document.getElementById("=").addEventListener("click", function(){
     if (operation){document.getElementById(operation).style.backgroundColor = 'red';}
     accumulator = operate(operation, accumulator, currentValue);
-    displayAccumulator(accumulator);
+    display(accumulator);
     currentValue = null;
 });
