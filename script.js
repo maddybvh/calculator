@@ -29,6 +29,7 @@ function operate (operator, a, b){
 
 var accumulator = 0;
 var currentValue = 0;
+var operation = null;
 
 function displayAccumulator (accumulator){
     document.getElementById('screen').innerHTML = `${accumulator}`
@@ -49,22 +50,26 @@ document.getElementById("clear").addEventListener("click", function(){
 //NUMBER BUTTONS
 const buttons = document.querySelectorAll('.numButton');
 buttons.forEach((button) => {button.addEventListener('click', (e) => {
-    currentValue = button.id;
-    displayCurrentValue(currentValue);
-    console.log(currentValue)
+    if (operation){
+        accumulator = operate(operation, accumulator, button.id)
+        document.getElementById(`${operation}`).style.backgroundColor = 'red';
+    }
+    else{
+        accumulator = button.id
+    }
+    displayAccumulator(button.id);
   });
 });
 
 //OPERATORS
 const ops = document.querySelectorAll('.op');
 ops.forEach((button) => {button.addEventListener('click', (e) => {
-    accumulator = operate(button.id, accumulator, currentValue);
-    displayAccumulator(accumulator);
+    operation = button.id;
+    document.getElementById(`${button.id}`).style.backgroundColor = 'maroon';
 });
 })
 
 //EQUALS
 document.getElementById("=").addEventListener("click", function(){
     displayAccumulator(accumulator);
-    console.log(accumulator)
 });
