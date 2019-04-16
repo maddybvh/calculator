@@ -47,10 +47,10 @@ var dec = null;
 //DISPLAY
 function display (number){
     if (number){number = number.toString()}
-    if (number.length > 8){
-         number = number.slice(0,7);
-        }
-    document.getElementById('screen').innerHTML = `${number}`
+    if (number.length >= 8){
+        number = number.slice(0,8);
+    }
+    document.getElementById('screen').innerHTML = `${number}`;
 }
 
 //CLEAR
