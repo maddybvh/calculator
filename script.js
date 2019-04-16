@@ -105,7 +105,6 @@ ops1.forEach((button) => {button.addEventListener('click', (e) => {
     else {
         accumulator = operate1(button.id, accumulator);
         display(accumulator);
-
     }
 
 });
@@ -118,6 +117,7 @@ document.getElementById("decimal").addEventListener("click", function(){
         document.getElementById('decimal').style.backgroundColor = 'gray';
         currentValue = currentValue + '.'
         display(currentValue);
+        dec = true;
     }
 });
 
