@@ -65,8 +65,7 @@ document.getElementById("clear").addEventListener("click", function(){
 
 //NUMBER BUTTONS
 const buttons = document.querySelectorAll('.numButton');
-buttons.forEach((button) => {button.addEventListener('click', (e) => {
-    if (operation){document.getElementById(operation).style.backgroundColor = 'red';}
+buttons.forEach((button) => {button.addEventListener('click', (e) => {  
     if (currentValue) {
         currentValue = currentValue + button.id;
     }
@@ -81,6 +80,12 @@ buttons.forEach((button) => {button.addEventListener('click', (e) => {
 //OPERATORS (2 variables)
 const ops = document.querySelectorAll('.op');
 ops.forEach((button) => {button.addEventListener('click', (e) => {
+    if (currentValue && accumulator && operation){
+        accumulator = operate(operation, accumulator, currentValue);
+        document.getElementById(operation).style.backgroundColor = 'red';
+        currentValue = null;
+        display(accumulator)
+    }
     if (currentValue){
         accumulator = currentValue;
         currentValue = null;
