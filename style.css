@@ -35,16 +35,15 @@ div {
 }
 
 button{
-    height: 30px;
+    height: 35px;
     width: 45px;
-    padding: 4px 5px 5px 5px;
-    margin: 2px; 
+    padding: 5px 5px 5px 5px;
+    margin: 4px 2px; 
     border-radius: 5px;
     background-color: red;
     color: white;
     border-color: darkgray;
     font-size: 16px;
-
 }
 
 .numButton {

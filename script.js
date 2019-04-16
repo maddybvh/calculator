@@ -1,16 +1,20 @@
 function add (a,b) {
 	return Number(a) + Number(b);
 }
+
 function subtract (a, b) {
 	return Number(a) - Number(b);
 }
+
 function multiply (a, b) {
     return Number(a) * Number(b);
 }
+
 function divide (a, b) {
     if (b == 0){return 'ERROR'}
     else{return Number(a) / Number(b);}
 }
+
 function operate (operator, a, b){
     switch(operator){
         case '+': 
@@ -23,12 +27,13 @@ function operate (operator, a, b){
             return divide(a, b); 
     }
 }
+
 function operate1 (operator, a){
     switch (operator){
         case 'sign':
             return (-1) * Number(a);
         case 'root':
-            return Math.sqrt(Number(a));
+            return Math.sqrt(a);
         case 'per':
             return 100 * Number(a);
     }
@@ -39,8 +44,9 @@ var currentValue = null;
 var operation = null;
 var dec = null;
 
+//DISPLAY
 function display (number){
-    number = number.toString();
+    if (number){number = number.toString()}
     if (number.length > 8){
          number = number.slice(0,7);
         }
@@ -67,25 +73,22 @@ buttons.forEach((button) => {button.addEventListener('click', (e) => {
     else {
         currentValue = button.id;
     }
-    display(currentValue);
+    if(currentValue){display(currentValue)}
+    else{display(accumulator)}
   });
 });
 
 //OPERATORS (2 variables)
 const ops = document.querySelectorAll('.op');
 ops.forEach((button) => {button.addEventListener('click', (e) => {
-    if (currentValue && accumulator){
-        accumulator = operate(operation, accumulator, currentValue);
-        display(accumulator);
+    if (currentValue){
+        accumulator = currentValue;
+        currentValue = null;
     }
-    else{
-        accumulator = currentValue;  
-    }
-    currentValue = null;
     operation = button.id;
     document.getElementById(operation).style.backgroundColor = 'maroon';
-    });
 });
+})
 
 //OPERATORS (1 variable)
 const ops1 = document.querySelectorAll('.op1');
