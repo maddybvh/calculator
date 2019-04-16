@@ -59,6 +59,8 @@ document.getElementById("clear").addEventListener("click", function(){
     accumulator = 0;
     currentValue = null;
     operation = null;
+    dec = null; 
+    document.getElementById('decimal').style.backgroundColor = 'white';
     display(accumulator)
 });
 
@@ -80,6 +82,8 @@ buttons.forEach((button) => {button.addEventListener('click', (e) => {
 //OPERATORS (2 variables)
 const ops = document.querySelectorAll('.op');
 ops.forEach((button) => {button.addEventListener('click', (e) => {
+    dec = null; 
+    document.getElementById('decimal').style.backgroundColor = 'white';
     if (currentValue && accumulator && operation){
         accumulator = operate(operation, accumulator, currentValue);
         document.getElementById(operation).style.backgroundColor = 'red';
@@ -98,6 +102,8 @@ ops.forEach((button) => {button.addEventListener('click', (e) => {
 //OPERATORS (1 variable)
 const ops1 = document.querySelectorAll('.op1');
 ops1.forEach((button) => {button.addEventListener('click', (e) => {
+    dec = null; 
+    document.getElementById('decimal').style.backgroundColor = 'white';
     if (currentValue){
         currentValue = operate1(button.id, currentValue);
         display(currentValue);
@@ -128,4 +134,6 @@ document.getElementById("=").addEventListener("click", function(){
     display(accumulator);
     currentValue = null;
     operation = null;
+    dec = null;
+    document.getElementById('decimal').style.backgroundColor = 'white';
 });
