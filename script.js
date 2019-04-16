@@ -98,9 +98,16 @@ ops.forEach((button) => {button.addEventListener('click', (e) => {
 //OPERATORS (1 variable)
 const ops1 = document.querySelectorAll('.op1');
 ops1.forEach((button) => {button.addEventListener('click', (e) => {
-    if (currentValue == null){currentValue = accumulator}
-    currentValue = operate1(button.id, currentValue);
-    display(currentValue);
+    if (currentValue){
+        currentValue = operate1(button.id, currentValue);
+        display(currentValue);
+    }
+    else {
+        accumulator = operate1(button.id, accumulator);
+        display(accumulator);
+
+    }
+
 });
 })
 
